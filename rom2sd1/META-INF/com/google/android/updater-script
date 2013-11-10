@@ -1,0 +1,9 @@
+ui_print("----- ROM2SD by _that@xda - part 1 -----");
+ui_print("Unmounting system and data...");
+unmount("/system");
+unmount("/data");
+ui_print("Extracting...");
+package_extract_dir("bin", "/tmp");
+set_perm(0, 0, 0755, "/tmp/dev-rom2sd.sh");
+ui_print("Running script for ROM2SD");
+run_program("/tmp/dev-rom2sd.sh");
