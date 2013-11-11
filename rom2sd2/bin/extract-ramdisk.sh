@@ -45,14 +45,14 @@ cd /system/boot/ramdisk
 gzip -d -c /tmp/ramdisk.gz | cpio -i || cat /tmp/ramdisk.gz | lzma -d -c | cpio -i
 
 # kill the blob header so that the new kernel isn't flashed by the bootloader
-dd if=/dev/zero of=/dev/block/mmcblk0p4 size=32 count=1
+dd if=/dev/zero of=/dev/block/mmcblk0p4 bs=32 count=1
 
 # now change the ramdisk for ROM2SD:
 
 # mountpoints
 for i in *.rc fstab.*; do
-<------>sed -i 's/mmcblk0p1\([^0-9]\)/mmcblk1p3\1/g' $i
-<------>sed -i 's/mmcblk0p8\([^0-9]\)/mmcblk1p2\1/g' $i
+	sed -i 's/mmcblk0p1\([^0-9]\)/mmcblk1p3\1/g' $i
+	sed -i 's/mmcblk0p8\([^0-9]\)/mmcblk1p2\1/g' $i
 done
 
 # load wifi modules

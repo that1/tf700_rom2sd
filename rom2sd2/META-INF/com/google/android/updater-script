@@ -1,11 +1,12 @@
 ui_print("----- ROM2SD by _that@xda - part 2 -----");
-ui_print("Installing kernel modules...")
+ui_print("Installing kernel modules...");
 mount("ext4", "EMMC", "/dev/block/mmcblk0p1", "/system");
 package_extract_dir("modules", "/system/lib/modules");
 set_perm(0, 0, 0644, "/system/lib/modules");
 
-ui_print("Extracting kernel ramdisk...")
+ui_print("Extracting kernel ramdisk...");
 package_extract_dir("bin", "/tmp");
+set_perm(0, 0, 0755, "/tmp/extract-ramdisk");
 set_perm(0, 0, 0755, "/tmp/extract-ramdisk.sh");
 run_program("/tmp/extract-ramdisk.sh");
 
